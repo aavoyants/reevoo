@@ -4,8 +4,7 @@ class CheckoutTest < ActionDispatch::IntegrationTest
   fixtures :all
   
   test "first checkout test" do
-    curr_rule = Rule.find(1)
-    checkout = Checkout.new(curr_rule)
+    checkout = Checkout.new(Rule.all)
     checkout.scan(products(:FR1))
     checkout.scan(products(:SR1))
     checkout.scan(products(:FR1))
@@ -15,16 +14,14 @@ class CheckoutTest < ActionDispatch::IntegrationTest
   end
   
   test "second checkout test" do
-    curr_rule = Rule.find(1)
-    checkout = Checkout.new(curr_rule)
+    checkout = Checkout.new(Rule.all)
     checkout.scan(products(:FR1))
     checkout.scan(products(:FR1))
     assert_equal(3.11, checkout.total)
   end
   
   test "third checkout test" do
-    curr_rule = Rule.find(2)
-    checkout = Checkout.new(curr_rule)
+    checkout = Checkout.new(Rule.all)
     checkout.scan(products(:SR1))
     checkout.scan(products(:SR1))    
     checkout.scan(products(:FR1))
